@@ -1,0 +1,4 @@
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/planning-center-clone
+JWT_SECRET=tu_secreto_seguro_aqui
+JWT_EXPIRE=30d

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # Servicio de MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+    # No exponemos el puerto en producción por seguridad
+
+  # Servicio del Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    container_name: backend
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/planning-center-clone
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=30d
+      - JWT_COOKIE_EXPIRE=30
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  # Servicio del Frontend (Nginx para servir archivos estáticos)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    container_name: frontend
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # Servicio para certificados SSL
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+# Volúmenes
+volumes:
+  mongodb_data:
+
+# Redes
+networks:
+  app-network:
+    driver: bridge

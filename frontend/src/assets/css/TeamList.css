@@ -1,0 +1,65 @@
+/* TeamList.css */
+.team-list-page {
+  padding: 20px;
+}
+
+.team-list-controls {
+  margin-bottom: 20px;
+}
+
+.search-box {
+  margin-bottom: 15px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.team-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.team-card-content {
+  padding: 20px;
+}
+
+.team-card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.team-card-members {
+  font-size: 14px;
+  color: var(--light-text);
+  margin-bottom: 10px;
+}
+
+.team-card-description {
+  font-size: 14px;
+  color: var(--text-color);
+  margin-top: 10px;
+}
+
+.team-card-actions {
+  display: flex;
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  border-top: 1px solid var(--border-color);
+}
+
+.team-card-actions .btn {
+  margin-right: 10px;
+}

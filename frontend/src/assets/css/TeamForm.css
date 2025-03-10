@@ -1,0 +1,70 @@
+/* TeamForm.css */
+.team-form-page {
+  padding: 20px;
+}
+
+.team-form-container {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.position-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.position-input-group input {
+  flex-grow: 1;
+}
+
+.positions-list {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.positions-list h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.positions-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.positions-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.positions-list li:last-child {
+  border-bottom: none;
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: var(--error-color);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 5px;
+}
+
+.btn-remove:hover {
+  color: #d32f2f;
+}
+
+.form-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: var(--light-text);
+}

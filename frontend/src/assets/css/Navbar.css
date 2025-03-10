@@ -1,0 +1,54 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar-brand a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-menu {
+  display: flex;
+  margin-left: 40px;
+}
+
+.navbar-item {
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-item:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.navbar-end {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 16px;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid white;
+}
