@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import api from '../services/api';
+import Calendar from '../components/Calendar';
 import '../assets/css/Dashboard.css';
+import '../assets/css/Calendar.css';
 
 const Dashboard = () => {
   const [services, setServices] = useState([]);
@@ -11,6 +13,7 @@ const Dashboard = () => {
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
   
   const { currentUser } = useContext(AuthContext);
 
@@ -65,6 +68,12 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  // Manejar la selección de fecha en el calendario
+  const handleSelectDate = (date) => {
+    setSelectedDate(date);
+    // Aquí podrías filtrar los servicios para esta fecha específica
+  };
+
   if (loading) {
     return <div className="loading">Cargando...</div>;
   }
@@ -79,46 +88,64 @@ const Dashboard = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       
       <div className="dashboard-content">
-        <div className="dashboard-section">
-          <div className="section-header">
-            <h2>Servicios Próximos</h2>
-            <Link to="/services/create" className="btn btn-primary">
-              Nuevo Servicio
-            </Link>
+        {/* Primera fila - Secciones lado a lado */}
+        <div className="dashboard-top-row">
+          {/* Calendario como widget */}
+          <div className="dashboard-widget calendar-widget">
+            <div className="widget-header">
+              <h2>Calendario</h2>
+            </div>
+            <Calendar 
+              events={services} 
+              onSelectDate={handleSelectDate} 
+            />
           </div>
           
-          {upcomingServices.length === 0 ? (
-            <p className="no-data-message">No hay servicios próximos. ¡Crea uno nuevo!</p>
-          ) : (
-            <div className="services-grid">
-              {upcomingServices.slice(0, 5).map(service => (
-                <Link to={`/services/${service._id}`} key={service._id} className="service-card">
-                  <div className="service-card-date">
-                    {new Date(service.date).toLocaleDateString('es-ES', { 
-                      day: '2-digit', 
-                      month: 'short', 
-                      year: 'numeric' 
-                    })}
-                  </div>
-                  <h3 className="service-card-title">{service.title}</h3>
-                  <div className="service-card-time">
-                    {service.startTime} - {service.endTime}
-                  </div>
-                  <div className={`service-card-status status-${service.status}`}>
-                    {service.status}
-                  </div>
-                </Link>
-              ))}
+          {/* Servicios próximos */}
+          <div className="dashboard-section upcoming-services-section">
+            <div className="section-header">
+              <h2>Servicios Próximos</h2>
+              <Link to="/services/create" className="btn btn-primary">
+                Nuevo Servicio
+              </Link>
             </div>
-          )}
-          
-          {upcomingServices.length > 5 && (
-            <div className="show-more">
-              <Link to="/services">Ver todos los servicios</Link>
-            </div>
-          )}
+            
+            {upcomingServices.length === 0 ? (
+              <p className="no-data-message">No hay servicios próximos. ¡Crea uno nuevo!</p>
+            ) : (
+              <div className="services-list">
+                {upcomingServices.slice(0, 5).map(service => (
+                  <Link to={`/services/${service._id}`} key={service._id} className="service-card">
+                    <div className="service-card-date">
+                      {new Date(service.date).toLocaleDateString('es-ES', { 
+                        day: '2-digit', 
+                        month: 'short', 
+                        year: 'numeric' 
+                      })}
+                    </div>
+                    <h3 className="service-card-title">{service.title}</h3>
+                    <div className="service-card-time">
+                      {service.startTime} - {service.endTime}
+                    </div>
+                    <div className={`service-card-status status-${service.status}`}>
+                      {service.status === 'draft' ? 'Borrador' : 
+                       service.status === 'published' ? 'Publicado' : 
+                       service.status === 'completed' ? 'Completado' : 'Cancelado'}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+            
+            {upcomingServices.length > 5 && (
+              <div className="show-more">
+                <Link to="/services">Ver todos los servicios</Link>
+              </div>
+            )}
+          </div>
         </div>
         
+        {/* Segunda fila - Equipos y Personas */}
         <div className="dashboard-row">
           <div className="dashboard-column">
             <div className="dashboard-card">

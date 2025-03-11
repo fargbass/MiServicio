@@ -1,0 +1,102 @@
+/* Mobile.css - Archivo separado para mejoras móviles */
+/* Crear este archivo como frontend/src/assets/css/Mobile.css */
+
+/* Mejoras para dispositivos móviles */
+@media (max-width: 768px) {
+  /* Navbar en mobile */
+  .navbar {
+    padding: 0 10px;
+  }
+  
+  .navbar-brand {
+    font-size: 18px;
+  }
+  
+  .navbar-menu {
+    display: none;
+  }
+  
+  /* Sidebar en mobile */
+  .sidebar {
+    width: 60px;
+  }
+  
+  .sidebar-header {
+    display: none;
+  }
+  
+  .sidebar-menu li a span {
+    display: none;
+  }
+  
+  .sidebar-menu li .icon {
+    margin-right: 0;
+    font-size: 22px;
+  }
+  
+  /* Contenido principal en mobile */
+  .main-content {
+    margin-left: 60px;
+    padding: 15px 10px;
+  }
+  
+  /* Dashboard en mobile */
+  .dashboard-top-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  /* Calendario en mobile */
+  .calendar-container {
+    padding: 10px;
+  }
+  
+  .calendar-header {
+    margin-bottom: 10px;
+  }
+  
+  .calendar-day {
+    height: 24px;
+    font-size: 11px;
+  }
+  
+  .calendar-weekday {
+    font-size: 10px;
+  }
+  
+  /* Tarjetas en mobile */
+  .service-card {
+    padding: 12px;
+  }
+  
+  .service-card-title {
+    font-size: 16px;
+  }
+  
+  /* Botones en mobile */
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+/* Mejoras de accesibilidad para toques en mobile */
+@media (max-width: 768px) {
+  .btn,
+  .navbar-item,
+  .sidebar-menu li a,
+  .service-card,
+  .item-list li a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

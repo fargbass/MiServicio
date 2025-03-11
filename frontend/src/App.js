@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 // Componentes
 import Dashboard from './pages/Dashboard';
@@ -22,43 +23,46 @@ import Sidebar from './components/Sidebar';
 
 // Estilos
 import './assets/css/App.css';
+import './assets/css/DarkTheme.css';
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div className="app">
-          <Navbar />
-          <div className="app-container">
-            <Sidebar />
-            <main className="main-content">
-              <Switch>
-                <Route exact path="/" component={Login} />
-                <Route path="/register" component={Register} />
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                
-                {/* Rutas de Servicios */}
-                <PrivateRoute exact path="/services" component={ServiceList} />
-                <PrivateRoute exact path="/services/create" component={CreateService} />
-                <PrivateRoute exact path="/services/:id" component={ServiceDetail} />
-                
-                {/* Rutas de Equipos */}
-                <PrivateRoute exact path="/teams" component={TeamList} />
-                <PrivateRoute exact path="/teams/create" component={CreateTeam} />
-                <PrivateRoute exact path="/teams/:id" component={TeamDetail} />
-                
-                {/* Rutas de Personas */}
-                <PrivateRoute exact path="/people" component={PeopleList} />
-                <PrivateRoute exact path="/people/create" component={CreatePerson} />
-                <PrivateRoute exact path="/people/:id" component={PersonDetail} />
-                
-                <Route path="/404" component={NotFound} />
-                <Redirect to="/404" />
-              </Switch>
-            </main>
+      <ThemeProvider>
+        <Router>
+          <div className="app">
+            <Navbar />
+            <div className="app-container">
+              <Sidebar />
+              <main className="main-content">
+                <Switch>
+                  <Route exact path="/" component={Login} />
+                  <Route path="/register" component={Register} />
+                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                  
+                  {/* Rutas de Servicios */}
+                  <PrivateRoute exact path="/services" component={ServiceList} />
+                  <PrivateRoute exact path="/services/create" component={CreateService} />
+                  <PrivateRoute exact path="/services/:id" component={ServiceDetail} />
+                  
+                  {/* Rutas de Equipos */}
+                  <PrivateRoute exact path="/teams" component={TeamList} />
+                  <PrivateRoute exact path="/teams/create" component={CreateTeam} />
+                  <PrivateRoute exact path="/teams/:id" component={TeamDetail} />
+                  
+                  {/* Rutas de Personas */}
+                  <PrivateRoute exact path="/people" component={PeopleList} />
+                  <PrivateRoute exact path="/people/create" component={CreatePerson} />
+                  <PrivateRoute exact path="/people/:id" component={PersonDetail} />
+                  
+                  <Route path="/404" component={NotFound} />
+                  <Redirect to="/404" />
+                </Switch>
+              </main>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

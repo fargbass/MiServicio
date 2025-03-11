@@ -10,16 +10,26 @@
   align-items: center;
   padding: 0 20px;
   z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .navbar-brand {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
 }
 
 .navbar-brand a {
   color: white;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand a::before {
+  content: '🔔';
+  margin-right: 8px;
+  font-size: 20px;
 }
 
 .navbar-menu {
@@ -31,9 +41,14 @@
   margin-right: 20px;
   color: white;
   text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: all 0.2s;
 }
 
 .navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
   opacity: 0.9;
   text-decoration: none;
 }
@@ -46,9 +61,46 @@
 
 .user-name {
   margin-right: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.user-name::before {
+  content: '👤';
+  margin-right: 8px;
 }
 
 .logout-btn {
   background-color: transparent;
   border: 1px solid white;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 10px;
+  }
+  
+  .navbar-menu {
+    display: none;
+  }
+  
+  .navbar-brand {
+    font-size: 18px;
+  }
+  
+  .logout-btn {
+    padding: 4px 10px;
+    font-size: 14px;
+  }
 }

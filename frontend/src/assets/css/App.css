@@ -161,3 +161,79 @@ button:disabled, .btn:disabled {
   margin-left: 250px;
   margin-top: 60px;
 }
+
+/* Ajustes para móvil */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 60px;
+  }
+  
+  .dashboard-section,
+  .dashboard-card,
+  .service-card {
+    padding: 15px;
+  }
+}
+
+/* Mejoras de transiciones */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.service-card,
+.dashboard-card,
+.dashboard-section {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scrollbar personalizado (no afecta funcionalidad) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+/* Versión para tema oscuro */
+body.dark-theme::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mejoras de transiciones */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.service-card,
+.dashboard-card,
+.dashboard-section {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}

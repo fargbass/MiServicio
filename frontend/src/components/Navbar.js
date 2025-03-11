@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import ThemeSwitch from './ThemeSwitch';
 import '../assets/css/Navbar.css';
 
 const Navbar = () => {
@@ -31,6 +32,7 @@ const Navbar = () => {
         <span className="navbar-item user-name">
           {currentUser.name}
         </span>
+        <ThemeSwitch />
         <button 
           onClick={handleLogout} 
           className="navbar-item logout-btn"

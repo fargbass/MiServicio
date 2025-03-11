@@ -1,0 +1,93 @@
+/* Variables para tema oscuro */
+body.dark-theme {
+    --primary-color: #6c5ce7;
+    --secondary-color: #fd79a8;
+    --background-color: #1e1e2e;
+    --text-color: #f5f5f5;
+    --light-text: #a0a0a0;
+    --border-color: #444444;
+    --card-bg: #2d2d3a;
+    --success-color: #00b894;
+    --warning-color: #fdcb6e;
+    --error-color: #d63031;
+    --info-color: #0984e3;
+  }
+  
+  /* Transiciones suaves entre temas */
+  body, body.dark-theme {
+    transition: 
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+  
+  body.dark-theme .navbar {
+    background-color: #252536;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  body.dark-theme .sidebar {
+    background-color: #252536;
+    border-right: 1px solid var(--border-color);
+  }
+  
+  body.dark-theme .service-card,
+  body.dark-theme .calendar-event-item {
+    background-color: #363648;
+  }
+  
+  body.dark-theme .item-list li {
+    border-bottom: 1px solid #444444;
+  }
+  
+  body.dark-theme .service-card:hover,
+  body.dark-theme .dashboard-section:hover,
+  body.dark-theme .dashboard-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  }
+  
+  body.dark-theme .calendar-day {
+    color: var(--text-color);
+  }
+  
+  body.dark-theme .calendar-day-inactive {
+    color: #6c6c7c;
+  }
+  
+  body.dark-theme .calendar-day-today {
+    background-color: rgba(108, 92, 231, 0.2);
+  }
+  
+  body.dark-theme .calendar-weekday {
+    color: var(--light-text);
+  }
+  
+  body.dark-theme .btn-secondary {
+    background-color: #44445a;
+  }
+  
+  body.dark-theme .card-header {
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  /* Otras clases específicas que necesiten ajustes en modo oscuro */
+  body.dark-theme .status-draft {
+    background-color: rgba(9, 132, 227, 0.2);
+  }
+  
+  body.dark-theme .status-published {
+    background-color: rgba(0, 184, 148, 0.2);
+  }
+  
+  body.dark-theme .status-completed {
+    background-color: rgba(162, 155, 254, 0.2);
+  }
+  
+  body.dark-theme .status-cancelled {
+    background-color: rgba(214, 48, 49, 0.2);
+  }
+  
+  /* Transición para los elementos */
+  .service-card, .dashboard-section, .dashboard-card,
+  .btn, .calendar-day, .calendar-event-item {
+    transition: all 0.3s ease;
+  }

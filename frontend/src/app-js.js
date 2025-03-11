@@ -19,6 +19,7 @@ import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import './assets/css/Mobile.css';
 
 // Estilos
 import './App.css';

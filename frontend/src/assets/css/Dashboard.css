@@ -1,3 +1,4 @@
+/* Dashboard.css - Actualizado para layout con calendario widget */
 .dashboard {
   padding: 20px 10px;
 }
@@ -17,11 +18,65 @@
   gap: 30px;
 }
 
+/* Nueva fila superior para calendario y servicios próximos */
+.dashboard-top-row {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 20px;
+}
+
+/* Estilos para el widget de calendario */
+.dashboard-widget {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.calendar-widget {
+  overflow: hidden;
+}
+
+.widget-header {
+  padding: 16px 16px 0 16px;
+}
+
+.widget-header h2 {
+  font-size: 18px;
+  margin: 0;
+  color: var(--text-color);
+}
+
+/* Sección de servicios próximos */
+.upcoming-services-section {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .dashboard-section {
   background-color: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dashboard-section:hover,
+.dashboard-widget:hover,
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .section-header {
@@ -34,6 +89,7 @@
 .section-header h2 {
   font-size: 20px;
   color: var(--text-color);
+  margin: 0;
 }
 
 .services-grid {
@@ -46,16 +102,16 @@
   display: block;
   background-color: white;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 16px;
   padding: 16px;
   color: var(--text-color);
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
 
@@ -80,7 +136,7 @@
   display: inline-block;
   font-size: 12px;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 20px;
   text-transform: uppercase;
 }
 
@@ -109,6 +165,21 @@
   text-align: center;
 }
 
+.show-more a {
+  color: var(--primary-color);
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: rgba(63, 81, 181, 0.1);
+  transition: background-color 0.2s;
+  display: inline-block;
+}
+
+.show-more a:hover {
+  background-color: rgba(63, 81, 181, 0.2);
+  text-decoration: none;
+}
+
 .dashboard-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -117,9 +188,10 @@
 
 .dashboard-card {
   background-color: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card-header {
@@ -133,6 +205,7 @@
 .card-header h3 {
   font-size: 18px;
   color: var(--text-color);
+  margin: 0;
 }
 
 .card-content {
@@ -142,6 +215,7 @@
 .item-list {
   list-style: none;
   margin-bottom: 16px;
+  padding-left: 0;
 }
 
 .item-list li {
@@ -153,8 +227,62 @@
   border-bottom: none;
 }
 
+.item-list li a {
+  color: var(--text-color);
+  transition: color 0.2s;
+  display: block;
+  padding: 4px 0;
+}
+
+.item-list li a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
 .no-data-message {
   color: var(--light-text);
   text-align: center;
   padding: 20px 0;
+}
+
+/* Estilos para botones */
+.btn {
+  border-radius: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .dashboard-top-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .calendar-widget {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .section-header h2 {
+    margin-bottom: 10px;
+  }
 }

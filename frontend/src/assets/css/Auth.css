@@ -4,30 +4,133 @@
   align-items: center;
   min-height: 100vh;
   background-color: var(--background-color);
+  padding: 20px;
 }
 
 .auth-form-container {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   padding: 30px;
   background-color: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .auth-form-container h1 {
   text-align: center;
   margin-bottom: 10px;
   color: var(--primary-color);
+  font-size: 28px;
 }
 
 .auth-form-container h2 {
   text-align: center;
   margin-bottom: 24px;
   color: var(--text-color);
+  font-size: 20px;
+}
+
+.auth-form-container form {
+  text-align: left;
+}
+
+.auth-form-container .form-group {
+  margin-bottom: 20px;
+}
+
+.auth-form-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.auth-form-container input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.auth-form-container input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+}
+
+.auth-form-container .btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-form-container .btn:hover {
+  background-color: #3949ab;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3);
+}
+
+.auth-form-container .btn:active {
+  transform: translateY(-1px);
 }
 
 .auth-footer {
   margin-top: 24px;
   text-align: center;
   font-size: 14px;
+  color: var(--light-text);
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Para tema oscuro */
+body.dark-theme .auth-form-container {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-form-container {
+    padding: 20px;
+  }
+  
+  .auth-form-container h1 {
+    font-size: 24px;
+  }
+  
+  .auth-form-container h2 {
+    font-size: 18px;
+  }
 }
