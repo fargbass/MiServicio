@@ -42,7 +42,7 @@ const CreateTeam = () => {
     setFormData({ ...formData, positions: updatedPositions });
   };
   
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validación básica
@@ -55,13 +55,25 @@ const CreateTeam = () => {
       setLoading(true);
       setError('');
       
-      await api.post('/teams', formData);
+      const teamData = {
+        name: name,
+        description: description,
+        positions: positions
+      };
       
-      // Mostrar mensaje de éxito antes de redirigir
-      alert('Equipo creado exitosamente');
+      console.log('Enviando datos del equipo:', teamData);
       
-      // Redirigir a la lista de equipos
-      history.push('/teams');
+      const response = await api.post('/teams', teamData);
+      
+      if (response.status === 201) {
+        // Mostrar mensaje de éxito antes de redirigir
+        alert('Equipo creado exitosamente');
+        
+        // Redirigir a la lista de equipos
+        history.push('/teams');
+      } else {
+        throw new Error('Error inesperado al crear el equipo');
+      }
     } catch (err) {
       console.error('Error al crear el equipo:', err);
       setError(

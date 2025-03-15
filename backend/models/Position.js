@@ -12,8 +12,7 @@ const PositionSchema = new mongoose.Schema({
   },
   team: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Team',
-    required: true
+    ref: 'Team'
   },
   organization: {
     type: mongoose.Schema.Types.ObjectId,

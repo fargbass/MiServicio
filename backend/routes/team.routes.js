@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Team = require('../models/Team');
+const Position = require('../models/Position');
 const Person = require('../models/Person');
 const { protect, authorize } = require('../middleware/auth');
 
@@ -16,7 +17,8 @@ router.get('/', async (req, res) => {
     // Filtrar por organización del usuario
     const teams = await Team.find({ organization: req.user.organization })
       .sort({ name: 1 })
-      .populate('members.person', 'firstName lastName email');
+      .populate('members.person', 'firstName lastName email')
+      .populate('positions', 'name');
 
     res.status(200).json({
       success: true,
@@ -24,7 +26,7 @@ router.get('/', async (req, res) => {
       data: teams
     });
   } catch (err) {
-    console.error(err);
+    console.error('Error al obtener equipos:', err);
     res.status(500).json({ success: false, message: 'Error del servidor' });
   }
 });
@@ -52,7 +54,7 @@ router.get('/:id', async (req, res) => {
       data: team
     });
   } catch (err) {
-    console.error(err);
+    console.error('Error al obtener equipo:', err);
     res.status(500).json({ success: false, message: 'Error del servidor' });
   }
 });
@@ -62,23 +64,71 @@ router.get('/:id', async (req, res) => {
 // @access  Private
 router.post('/', async (req, res) => {
   try {
-    // Agregar el usuario y la organización
-    req.body.createdBy = req.user.id;
-    req.body.organization = req.user.organization;
+    const { name, description, positions } = req.body;
+    
+    // Verificar datos requeridos
+    if (!name) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'El nombre del equipo es obligatorio' 
+      });
+    }
 
-    const team = await Team.create(req.body);
+    // 1. Crear las posiciones primero si existen
+    const positionIds = [];
+    if (positions && positions.length > 0) {
+      console.log('Creando posiciones:', positions);
+      
+      for (const pos of positions) {
+        // Asegurarse de que pos es un objeto y tiene propiedad name
+        const posName = typeof pos === 'object' ? pos.name : pos;
+        
+        if (posName) {
+          const position = await Position.create({
+            name: posName,
+            organization: req.user.organization,
+            createdBy: req.user.id
+          });
+          positionIds.push(position._id);
+        }
+      }
+    }
+    
+    // 2. Crear el equipo con los IDs de posiciones
+    const team = await Team.create({
+      name,
+      description,
+      positions: positionIds,
+      organization: req.user.organization,
+      createdBy: req.user.id,
+      members: [] // Iniciar con array vacío de miembros
+    });
+    
+    // 3. Actualizar las posiciones para referenciar al equipo creado
+    if (positionIds.length > 0) {
+      await Position.updateMany(
+        { _id: { $in: positionIds } },
+        { team: team._id }
+      );
+      
+      console.log(`${positionIds.length} posiciones actualizadas con referencia al equipo`);
+    }
+    
+    // 4. Obtener el equipo creado con las referencias populadas
+    const populatedTeam = await Team.findById(team._id)
+      .populate('positions', 'name');
 
     res.status(201).json({
       success: true,
-      data: team
+      data: populatedTeam
     });
   } catch (err) {
-    console.error(err);
+    console.error('Error al crear equipo:', err);
     if (err.name === 'ValidationError') {
       const messages = Object.values(err.errors).map(val => val.message);
       return res.status(400).json({ success: false, message: messages });
     }
-    res.status(500).json({ success: false, message: 'Error del servidor' });
+    res.status(500).json({ success: false, message: 'Error del servidor: ' + err.message });
   }
 });
 
@@ -108,7 +158,7 @@ router.put('/:id', async (req, res) => {
       data: team
     });
   } catch (err) {
-    console.error(err);
+    console.error('Error al actualizar el equipo:', err);
     if (err.name === 'ValidationError') {
       const messages = Object.values(err.errors).map(val => val.message);
       return res.status(400).json({ success: false, message: messages });
@@ -133,6 +183,9 @@ router.delete('/:id', async (req, res) => {
       return res.status(403).json({ success: false, message: 'No autorizado para eliminar este equipo' });
     }
 
+    // Eliminar también referencias a este equipo en posiciones
+    await Position.deleteMany({ team: team._id });
+    
     await team.remove();
 
     res.status(200).json({
@@ -140,7 +193,7 @@ router.delete('/:id', async (req, res) => {
       data: {}
     });
   } catch (err) {
-    console.error(err);
+    console.error('Error al eliminar el equipo:', err);
     res.status(500).json({ success: false, message: 'Error del servidor' });
   }
 });
@@ -207,7 +260,7 @@ router.post('/:id/members', async (req, res) => {
       data: team
     });
   } catch (err) {
-    console.error(err);
+    console.error('Error al añadir miembro al equipo:', err);
     res.status(500).json({ success: false, message: 'Error del servidor' });
   }
 });
@@ -249,7 +302,7 @@ router.delete('/:id/members/:personId', async (req, res) => {
       data: team
     });
   } catch (err) {
-    console.error(err);
+    console.error('Error al eliminar miembro del equipo:', err);
     res.status(500).json({ success: false, message: 'Error del servidor' });
   }
 });

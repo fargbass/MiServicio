@@ -30,37 +30,44 @@ function App() {
     <AuthProvider>
       <ThemeProvider>
         <Router>
-          <div className="app">
-            <Navbar />
-            <div className="app-container">
-              <Sidebar />
-              <main className="main-content">
-                <Switch>
-                  <Route exact path="/" component={Login} />
-                  <Route path="/register" component={Register} />
-                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                  
-                  {/* Rutas de Servicios */}
-                  <PrivateRoute exact path="/services" component={ServiceList} />
-                  <PrivateRoute exact path="/services/create" component={CreateService} />
-                  <PrivateRoute exact path="/services/:id" component={ServiceDetail} />
-                  
-                  {/* Rutas de Equipos */}
-                  <PrivateRoute exact path="/teams" component={TeamList} />
-                  <PrivateRoute exact path="/teams/create" component={CreateTeam} />
-                  <PrivateRoute exact path="/teams/:id" component={TeamDetail} />
-                  
-                  {/* Rutas de Personas */}
-                  <PrivateRoute exact path="/people" component={PeopleList} />
-                  <PrivateRoute exact path="/people/create" component={CreatePerson} />
-                  <PrivateRoute exact path="/people/:id" component={PersonDetail} />
-                  
-                  <Route path="/404" component={NotFound} />
-                  <Redirect to="/404" />
-                </Switch>
-              </main>
-            </div>
-          </div>
+          <Switch>
+            {/* Rutas públicas de autenticación */}
+            <Route exact path="/" component={Login} />
+            <Route path="/register" component={Register} />
+            
+            {/* Rutas protegidas con layout completo */}
+            <Route>
+              <div className="app">
+                <Navbar />
+                <div className="app-container">
+                  <Sidebar />
+                  <main className="main-content">
+                    <Switch>
+                      <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                      
+                      {/* Rutas de Servicios */}
+                      <PrivateRoute exact path="/services" component={ServiceList} />
+                      <PrivateRoute exact path="/services/create" component={CreateService} />
+                      <PrivateRoute exact path="/services/:id" component={ServiceDetail} />
+                      
+                      {/* Rutas de Equipos */}
+                      <PrivateRoute exact path="/teams" component={TeamList} />
+                      <PrivateRoute exact path="/teams/create" component={CreateTeam} />
+                      <PrivateRoute exact path="/teams/:id" component={TeamDetail} />
+                      
+                      {/* Rutas de Personas */}
+                      <PrivateRoute exact path="/people" component={PeopleList} />
+                      <PrivateRoute exact path="/people/create" component={CreatePerson} />
+                      <PrivateRoute exact path="/people/:id" component={PersonDetail} />
+                      
+                      <Route path="/404" component={NotFound} />
+                      <Redirect to="/404" />
+                    </Switch>
+                  </main>
+                </div>
+              </div>
+            </Route>
+          </Switch>
         </Router>
       </ThemeProvider>
     </AuthProvider>

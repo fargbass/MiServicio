@@ -1,9 +1,16 @@
+// Asegúrate de que el modelo Position sea importado y registrado en tu aplicación
+// Esto normalmente se hace en el server.js o en el archivo donde se inicializa tu aplicación
+
+// Ejemplo de cómo deberías tener configuradas las rutas en server.js:
+
 // backend/server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
+
+// Importar modelos (asegúrate de que Position.js esté incluido)
+require('./models/Position'); // Añade esta línea si no existe
 
 // Rutas
 const authRoutes = require('./routes/auth.routes');
@@ -17,12 +24,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -40,13 +43,7 @@ app.use('/api/people', personRoutes);
 
 // Ruta para verificar servidor
 app.get('/', (req, res) => {
-  res.send('API de Mi Servicio está funcionando');
-});
-
-// Middleware para manejar rutas no encontradas
-app.use((req, res) => {
-  console.log(`Ruta no encontrada: ${req.method} ${req.originalUrl}`);
-  res.status(404).json({ success: false, message: 'Ruta no encontrada' });
+  res.send('API del clon de Planning Center está funcionando');
 });
 
 // Iniciar servidor
