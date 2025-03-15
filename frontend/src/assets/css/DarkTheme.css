@@ -1,93 +1,175 @@
-/* Variables para tema oscuro */
+/* DarkTheme.css - Soporte completo para tema oscuro */
 body.dark-theme {
-    --primary-color: #6c5ce7;
-    --secondary-color: #fd79a8;
-    --background-color: #1e1e2e;
-    --text-color: #f5f5f5;
-    --light-text: #a0a0a0;
-    --border-color: #444444;
-    --card-bg: #2d2d3a;
-    --success-color: #00b894;
-    --warning-color: #fdcb6e;
-    --error-color: #d63031;
-    --info-color: #0984e3;
-  }
-  
-  /* Transiciones suaves entre temas */
-  body, body.dark-theme {
-    transition: 
-      background-color 0.3s ease,
-      color 0.3s ease;
-  }
-  
-  body.dark-theme .navbar {
-    background-color: #252536;
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  body.dark-theme .sidebar {
-    background-color: #252536;
-    border-right: 1px solid var(--border-color);
-  }
-  
-  body.dark-theme .service-card,
-  body.dark-theme .calendar-event-item {
-    background-color: #363648;
-  }
-  
-  body.dark-theme .item-list li {
-    border-bottom: 1px solid #444444;
-  }
-  
-  body.dark-theme .service-card:hover,
-  body.dark-theme .dashboard-section:hover,
-  body.dark-theme .dashboard-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  }
-  
-  body.dark-theme .calendar-day {
-    color: var(--text-color);
-  }
-  
-  body.dark-theme .calendar-day-inactive {
-    color: #6c6c7c;
-  }
-  
-  body.dark-theme .calendar-day-today {
-    background-color: rgba(108, 92, 231, 0.2);
-  }
-  
-  body.dark-theme .calendar-weekday {
-    color: var(--light-text);
-  }
-  
-  body.dark-theme .btn-secondary {
-    background-color: #44445a;
-  }
-  
-  body.dark-theme .card-header {
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  /* Otras clases específicas que necesiten ajustes en modo oscuro */
-  body.dark-theme .status-draft {
-    background-color: rgba(9, 132, 227, 0.2);
-  }
-  
-  body.dark-theme .status-published {
-    background-color: rgba(0, 184, 148, 0.2);
-  }
-  
-  body.dark-theme .status-completed {
-    background-color: rgba(162, 155, 254, 0.2);
-  }
-  
-  body.dark-theme .status-cancelled {
-    background-color: rgba(214, 48, 49, 0.2);
-  }
-  
-  /* Transición para los elementos */
-  .service-card, .dashboard-section, .dashboard-card,
-  .btn, .calendar-day, .calendar-event-item {
-    transition: all 0.3s ease;
-  }
+  --primary-color: #6c5ce7;
+  --secondary-color: #fd79a8;
+  --background-color: #1e1e2e;
+  --text-color: #f5f5f5;
+  --light-text: #a0a0a0;
+  --border-color: #444444;
+  --card-bg: #2d2d3a;
+  --success-color: #00b894;
+  --warning-color: #fdcb6e;
+  --error-color: #d63031;
+  --info-color: #0984e3;
+  --input-bg: #363648;
+  --input-border: #555566;
+  --dropdown-bg: #252536;
+  --hover-bg: #3f3f55;
+}
+
+/* Transiciones suaves entre temas */
+body, body.dark-theme {
+  transition: 
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Componentes básicos */
+body.dark-theme .navbar {
+  background-color: #252536;
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-theme .sidebar {
+  background-color: #252536;
+  border-right: 1px solid var(--border-color);
+}
+
+body.dark-theme .sidebar-menu li a:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Cards y contenedores */
+body.dark-theme .service-card,
+body.dark-theme .dashboard-card,
+body.dark-theme .team-card,
+body.dark-theme .calendar-event-item,
+body.dark-theme .auth-form-container {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+/* Efectos hover */
+body.dark-theme .service-card:hover,
+body.dark-theme .dashboard-section:hover,
+body.dark-theme .dashboard-card:hover,
+body.dark-theme .team-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Formularios */
+body.dark-theme input,
+body.dark-theme textarea,
+body.dark-theme select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-color);
+}
+
+body.dark-theme input:focus,
+body.dark-theme textarea:focus,
+body.dark-theme select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2);
+}
+
+body.dark-theme option {
+  background-color: var(--dropdown-bg);
+}
+
+/* Tablas */
+body.dark-theme table {
+  color: var(--text-color);
+}
+
+body.dark-theme th {
+  background-color: #252536;
+}
+
+body.dark-theme td {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-theme tr:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Calendario */
+body.dark-theme .calendar-container {
+  background-color: var(--card-bg);
+}
+
+body.dark-theme .calendar-day {
+  color: var(--text-color);
+}
+
+body.dark-theme .calendar-day-inactive {
+  color: #6c6c7c;
+}
+
+body.dark-theme .calendar-day-today {
+  background-color: rgba(108, 92, 231, 0.2);
+}
+
+body.dark-theme .calendar-weekday {
+  color: var(--light-text);
+}
+
+body.dark-theme .calendar-event-item {
+  background-color: #363648;
+}
+
+/* Detalles específicos */
+body.dark-theme .card-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-theme .item-list li {
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-theme .calendar-events {
+  border-top: 1px solid var(--border-color);
+}
+
+/* Estados */
+body.dark-theme .status-draft {
+  background-color: rgba(9, 132, 227, 0.2);
+}
+
+body.dark-theme .status-published {
+  background-color: rgba(0, 184, 148, 0.2);
+}
+
+body.dark-theme .status-completed {
+  background-color: rgba(162, 155, 254, 0.2);
+}
+
+body.dark-theme .status-cancelled {
+  background-color: rgba(214, 48, 49, 0.2);
+}
+
+/* Alertas y notificaciones */
+body.dark-theme .alert-danger {
+  background-color: rgba(214, 48, 49, 0.1);
+  border-color: var(--error-color);
+}
+
+body.dark-theme .alert-success {
+  background-color: rgba(0, 184, 148, 0.1);
+  border-color: var(--success-color);
+}
+
+/* Diálogos y modales */
+body.dark-theme .modal-content {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark-theme .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-theme .modal-footer {
+  border-top-color: var(--border-color);
+}

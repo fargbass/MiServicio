@@ -1,0 +1,141 @@
+/* Toast.css - Estilos para notificaciones toast */
+
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2000;
+  max-width: 350px;
+}
+
+.toast-notification {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: #333;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  animation: toastIn 0.3s ease forwards;
+  overflow: hidden;
+  position: relative;
+}
+
+.toast-notification::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+}
+
+.toast-notification.hide {
+  animation: toastOut 0.3s ease forwards;
+}
+
+.toast-notification.success {
+  border-left: 5px solid #4caf50;
+}
+
+.toast-notification.success::before {
+  background-color: #4caf50;
+}
+
+.toast-notification.error {
+  border-left: 5px solid #f44336;
+}
+
+.toast-notification.error::before {
+  background-color: #f44336;
+}
+
+.toast-notification.warning {
+  border-left: 5px solid #ff9800;
+}
+
+.toast-notification.warning::before {
+  background-color: #ff9800;
+}
+
+.toast-notification.info {
+  border-left: 5px solid #2196f3;
+}
+
+.toast-notification.info::before {
+  background-color: #2196f3;
+}
+
+.toast-icon {
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 14px;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+  padding: 0;
+  margin-left: 8px;
+}
+
+.toast-close:hover {
+  color: #333;
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+/* Tema oscuro */
+body.dark-theme .toast-notification {
+  background-color: #2d2d3a;
+  color: #f5f5f5;
+}
+
+body.dark-theme .toast-close {
+  color: #a0a0a0;
+}
+
+body.dark-theme .toast-close:hover {
+  color: #f5f5f5;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .toast-container {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+}

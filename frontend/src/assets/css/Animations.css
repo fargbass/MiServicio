@@ -1,0 +1,175 @@
+/* Animations.css - Animaciones y transiciones para mejorar la UI/UX */
+
+/* Transiciones base para todos los elementos interactivos */
+.btn,
+.navbar-item,
+.sidebar-menu li a,
+.service-card,
+.dashboard-card,
+.dashboard-section,
+.team-card,
+.calendar-day,
+input, 
+select,
+textarea,
+.auth-form-container {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Animaciones de entrada para páginas */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Animación suave para el dashboard */
+.dashboard-content {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación para cards */
+.service-card, 
+.team-card,
+.dashboard-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Efecto de elevación para cards y botones */
+.service-card:hover,
+.dashboard-card:hover,
+.team-card:hover,
+.calendar-event-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación de pulse para elementos de atención */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.btn-primary:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Animación para sidebar */
+.sidebar-menu li a:hover {
+  padding-left: 25px;
+}
+
+/* Animación para el switch de tema */
+.slider:before {
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Animación para alerta de errores */
+.alert {
+  animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animación para el menú desplegable en móvil */
+.dropdown-content {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.dropdown-content.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animación sutil para listas */
+.item-list li {
+  transition: background-color 0.2s;
+}
+
+.item-list li:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+body.dark-theme .item-list li:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Animación para calendario */
+.calendar-day:hover {
+  transform: scale(1.1);
+}
